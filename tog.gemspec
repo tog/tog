@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "tog"
-  s.version  = "0.1.7"
+  s.version  = "0.2.6"
   
   s.date     = "2008-09-01"
   s.summary  = "tog: extensible open source social network platform"
@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
     "README.rdoc", 
 		"tog.gemspec",
 		"lib/tog.rb",
+		"lib/tog/install.rb",
+		"lib/tog/plugin.rb",
 	  "templates/lib/tasks/platform.rake.tpl"]
   s.rdoc_options = ["--main", "README.rdoc"]
   s.extra_rdoc_files = ["README.rdoc"]

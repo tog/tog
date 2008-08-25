@@ -1,4 +1,5 @@
 require 'optparse'
+require 'ftools'
 
 module Tog
   class Install
@@ -7,7 +8,7 @@ module Tog
       @args = runtime_args
       parse!(@args)
 
-      @source_root = File.join(File.dirname(__FILE__), '/../templates')
+      @source_root = File.join(File.dirname(__FILE__), '/../../templates')
       @destination_root = ARGV.shift
 
       usage if options[:help]
@@ -22,6 +23,7 @@ module Tog
       add_desert_to_environment
       ['tog_core', 'tog_user', 'tog_social'].each{|plugin|
         Tog::Plugin.new.install(destination_root, plugin)
+        puts "[#{plugin}] installed!"
       }
       puts "[done] togified!"
     end
@@ -38,13 +40,11 @@ module Tog
       return args
     end
 
-    
-
     def add_desert_to_environment
       sentinel = 'Rails::Initializer.run do |config|'
       puts "desert requirement added to environment.rb"
       gsub_file 'config/environment.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
-          "require 'desert'\n #{match}\n"
+          "require 'desert'\n#{match}\n"
       end
     end
     
@@ -62,7 +62,7 @@ module Tog
       files = {
         "lib/tasks/platform.rake.tpl" => "lib/tasks/platform.rake"
       }
-      templates_dir = File.join(File.dirname(__FILE__), '/../templates')
+      templates_dir = File.join(File.dirname(__FILE__), '/../../templates')
       files.each do |template, file|
         file = File.join(destination_root, file)
         if File.exists?(file)
@@ -73,7 +73,7 @@ module Tog
           warn "[skip] directory `#{File.dirname(file)}' does not exist"
         else
           puts "[add] writing `#{file}'"
-          File.copy(File.join(templates_dir, template), file)
+          File.copy(File.join(source_root, template), file)
         end
       end
     end
