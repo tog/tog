@@ -22,8 +22,7 @@ module Tog
       create_files
       add_desert_to_environment
       ['tog_core', 'tog_user', 'tog_social'].each{|plugin|
-        Tog::Plugin.new.install(destination_root, plugin)
-        puts "[#{plugin}] installed!"
+        Tog::Plugin.new(destination_root, plugin).install
       }
       puts "[done] togified!"
     end
