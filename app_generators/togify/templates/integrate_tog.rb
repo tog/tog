@@ -1,9 +1,9 @@
 class <%= migration_name %> < ActiveRecord::Migration
-  def self.up<% plugins.each_pair do |plugin, details| %>
-    migrate_plugin "<%= plugin %>", <%= details[:current_migration] %><%- end %>
+  def self.up<% plugins.each do |plugin| %>
+    migrate_plugin "<%= plugin[:name] %>", <%= plugin[:current_migration] %><%- end %>
   end
 
-  def self.down<% plugins.each_pair do |plugin, details| %>
-    migrate_plugin "<%= plugin %>", 0 <%- end %>
+  def self.down<% plugins.reverse.each do |plugin| %>
+    migrate_plugin "<%= plugin[:name] %>", 0 <%- end %>
   end
 end

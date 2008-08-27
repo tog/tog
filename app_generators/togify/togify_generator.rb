@@ -77,20 +77,19 @@ EOS
 
     # Tog plugins
     def default_plugins
-      plugins = %w{ tog_core tog_social tog_mail}
+      plugins = %w{ tog_core }
       plugins << "tog_user" unless options[:skip_tog_user]
+      plugins += %w{tog_social tog_mail}
     end
     
     def install_default_plugins
-      installed_plugins = {}
-      default_plugins.each{|plugin|
+      default_plugins.collect{|plugin|
         plugin_path = "#{destination_root}/vendor/plugins/#{plugin}" 
         checkout_code(plugin_path, plugin)
-        installed_plugins[plugin] = {:current_migration => current_migration_number(plugin_path)} 
         logger.create "vendor/plugins/#{plugin}"
         route_from_plugins("#{destination_root}/config/routes.rb", plugin)
+        {:name => plugin,:current_migration => current_migration_number(plugin_path) }
       }
-      installed_plugins
     end
     
     def checkout_code(plugin_path, plugin)
