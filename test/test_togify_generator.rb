@@ -25,8 +25,12 @@ class TestTogifyGenerator < Test::Unit::TestCase
         assert_has_plugin_routes body, plugin
       end
     }
+    generated_migration = Dir.glob("#{APP_ROOT}/db/migrate/*_integrate_tog.rb")[0]
+    assert generated_migration, "should be a IntegrateTog migration in the togified app"
+    File.open(generated_migration, "r") do |file|
+      assert file.read=~/tog_core.*tog_user.*tog_social.*tog_mail.*tog_mail.*tog_social.*tog_user.*tog_core/m,"plugins migrations should be in correct order"
+    end
   end
-
 
   private
   def sources
