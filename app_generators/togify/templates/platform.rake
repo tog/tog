@@ -13,10 +13,8 @@ namespace :tog do
     task :install do
       
     end
-  end
-  namespace :test do
     desc "Runs tests on all available Tog Plugins. Pass PLUGIN=plugin_name to test a single plugin"
-    task :plugins do
+    task :test do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
         if File.directory?(File.join(directory, 'test'))
           chdir directory do
