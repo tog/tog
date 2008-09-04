@@ -1,6 +1,6 @@
 namespace :tog do
   namespace :plugins do
-    desc "Update the tog plugins on this app"
+    desc "Update the tog plugins on this app."
     task :update do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
         put "Pulling changes from the #{directory} repository"
@@ -13,7 +13,22 @@ namespace :tog do
     task :install do
       
     end
-    desc "Runs tests on all available Tog Plugins. Pass PLUGIN=plugin_name to test a single plugin"
+
+    desc "Copy the public resources stored on the /public folder of every tog plugin on the app's public folder with the plugin name used as prefix. Pass PLUGIN=plugin_name to copy the resources of a single plugin."
+    task :copy_resources do
+      plugin_roots(ENV["PLUGIN"]).each do |directory|
+        plugin_name = File.basename(directory) 
+        dest_public_dir = File.join(RAILS_ROOT, "public", plugin_name)
+        orig_public_dir = File.join(directory, "public")
+        if File.exists?(orig_public_dir)
+          puts "Copying the public resources of #{plugin_name} to #{dest_public_dir}"
+          FileUtils.mkdir_p(dest_public_dir)
+          FileUtils.cp_r(Dir["#{orig_public_dir}/*"], dest_public_dir )
+        end
+      end
+    end
+
+    desc "Runs tests on all available Tog Plugins. Pass PLUGIN=plugin_name to test a single plugin."
     task :test do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
         if File.directory?(File.join(directory, 'test'))
@@ -27,7 +42,7 @@ namespace :tog do
         end
       end
     end
-    desc "List the names of tog plugins test methods in a specification like format. Pass PLUGIN=plugin_name to list a single plugin"
+    desc "List the names of tog plugins test methods in a specification like format. Pass PLUGIN=plugin_name to list a single plugin."
     task :list_specs do
       require File.expand_path(File.join(RAILS_ROOT, "config","environment"))
       require 'test/unit'
