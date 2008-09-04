@@ -97,7 +97,7 @@ EOS
       revision = "head"
       
       FileUtils.rm_rf(plugin_path)
-      %x{"git clone #{repository} #{plugin_path}"}
+      system("git clone #{repository} #{plugin_path}")
     end
     def current_migration_number(plugin_path)
       Dir.glob("#{plugin_path}/db/migrate/*.rb").inject(0) do |max, file_path|

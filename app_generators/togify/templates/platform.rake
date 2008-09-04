@@ -5,7 +5,7 @@ namespace :tog do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
         put "Pulling changes from the #{directory} repository"
         chdir directory do
-           %x{git pull}
+           system("git pull")
         end
       end
     end
