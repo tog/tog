@@ -14,7 +14,7 @@ class TestTogifyGenerator < Test::Unit::TestCase
   def test_generator_without_options
     run_generator('togify', [APP_ROOT], sources)
 
-    assert_generated_file   "lib/tasks/platform.rake"
+    assert_generated_file "lib/tasks/platform.rake"
     assert_generated_file "config/environment.rb" do |body|
       assert_has_require body, 'desert'
     end

@@ -1,16 +1,16 @@
 Gem::Specification.new do |s|
   s.name = %q{tog}
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aitor Garc\303\255a", "Alberto Molpeceres", "Roberto Salicio"]
-  s.date = %q{2008-08-29}
+  s.date = %q{2008-09-04}
   s.default_executable = %q{togify}
   s.description = %q{extensible open source social network platform}
   s.email = ["aitor@linkingpaths.com", "alberto@linkingpaths.com", "roberto@linkingpaths.com"]
   s.executables = ["togify"]
   s.extra_rdoc_files = ["Manifest.txt", "README.txt"]
-  s.files = ["CHANGELOG", "Manifest.txt", "POST_INSTALL", "README.txt", "Rakefile", "app_generators/togify/USAGE", "app_generators/togify/templates/integrate_tog.rb", "app_generators/togify/templates/platform.rake", "app_generators/togify/togify_generator.rb", "bin/togify", "config/hoe.rb", "config/requirements.rb", "generators/tog_plugin/USAGE", "generators/tog_plugin/tog_plugin_generator.rb", "lib/tog.rb", "lib/tog/version.rb", "test/templates/environment.rb", "test/templates/routes.rb", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_tog.rb", "test/test_tog_plugin_generator.rb", "test/test_togify_generator.rb", "tog.gemspec"]
+  s.files = ["CHANGELOG", "MIT-LICENSE", "Manifest.txt", "POST_INSTALL", "README.txt", "Rakefile", "app_generators/togify/USAGE", "app_generators/togify/templates/integrate_tog.rb", "app_generators/togify/togify_generator.rb", "bin/togify", "config/hoe.rb", "config/requirements.rb", "generators/tog_plugin/USAGE", "generators/tog_plugin/tog_plugin_generator.rb", "lib/tasks/tog.rb", "lib/tasks/platform.rake", "lib/tog.rb", "lib/tog/version.rb", "test/templates/environment.rb", "test/templates/routes.rb", "test/test_generator_helper.rb", "test/test_helper.rb", "test/test_tog.rb", "test/test_tog_plugin_generator.rb", "test/test_togify_generator.rb", "tog.gemspec"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/tog/tog}
   s.post_install_message = %q{
