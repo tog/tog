@@ -19,8 +19,8 @@ class TogifyGenerator < RubiGen::Base
     record do |m|
       BASEDIRS.each { |path| m.directory path }
 
-      # Rake tasks
-      m.template "platform.rake", "lib/tasks/platform.rake"
+      # Include tog rake tasks on the app
+      include_tog_rake_tasks("#{destination_root}/Rakefile")
       
       # Install desert dependency 
       require_desert_on_environment("#{destination_root}/config/environment.rb") 
@@ -64,7 +64,18 @@ EOS
       # raw instance variable value.
       # @author = options[:author]
     end
-
+    
+    def include_tog_rake_tasks(rakefile)
+      sentinel = "require 'tasks/rails'"
+      logger.create "require tog rake tasks"
+      unless options[:pretend]
+        gsub_file rakefile, /(#{Regexp.escape(sentinel)})/mi do |match|
+          "#{match}\n\nrequire 'tasks/tog'\n"
+        end
+      end
+      
+    end
+    
     def require_desert_on_environment(env_file)
       sentinel = 'Rails::Initializer.run do |config|'
       logger.create "require 'desert' on environment"
@@ -96,11 +107,8 @@ EOS
       repository = "git@github.com:tog/#{plugin}.git"
       revision = "head"
       
-      command_line = [ "rm -rf #{plugin_path}",
-        "git clone #{repository} #{plugin_path}"
-      ].join(" && ")
-      
-      %x{#{command_line}}
+      FileUtils.rm_rf(plugin_path)
+      system("git clone #{repository} #{plugin_path}")
     end
     def current_migration_number(plugin_path)
       Dir.glob("#{plugin_path}/db/migrate/*.rb").inject(0) do |max, file_path|

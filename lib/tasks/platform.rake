@@ -5,7 +5,7 @@ namespace :tog do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
         put "Pulling changes from the #{directory} repository"
         chdir directory do
-           %x{git pull}
+           system("git pull")
         end
       end
     end
@@ -29,7 +29,7 @@ namespace :tog do
     end
     desc "List the names of tog plugins test methods in a specification like format. Pass PLUGIN=plugin_name to list a single plugin"
     task :list_specs do
-      require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
+      require File.expand_path(File.join(RAILS_ROOT, "config","environment"))
       require 'test/unit'
       require 'rubygems'
       require 'active_support'
@@ -58,7 +58,7 @@ namespace :tog do
 end
 
 def plugin_roots(plugin=nil)
-  roots = Dir[File.dirname(__FILE__)+'/../../vendor/plugins/tog_*']
+  roots = Dir[File.join(RAILS_ROOT, 'vendor', 'plugins', 'tog_*')]
   if plugin
     roots = roots.select {|x| /\/(\d+_)?#{plugin}$/ === x }
     if roots.empty?
