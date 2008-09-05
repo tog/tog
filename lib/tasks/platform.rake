@@ -3,14 +3,29 @@ namespace :tog do
     desc "Update the tog plugins on this app."
     task :update do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
-        put "Pulling changes from the #{directory} repository"
+        puts "Pulling changes of #{File.basename(directory)}"
         chdir directory do
-           system("git pull")
+           output = %x{git pull}
         end
       end
     end
-    desc "Install a new tog plugin"
+    desc "Install a new tog plugin. Use PLUGIN parameter to specify the plugin to install e.g. PLUGIN=tog_vault. Use FORCE=true to overwrite the plugin if it's currently installed."
     task :install do
+      plugin = ENV["PLUGIN"]
+      force = ENV["FORCE"] || false
+      puts "Installing #{plugin} on vendor/plugins/#{plugin}"
+      cmd = "script/plugin install git@github.com:tog/#{plugin}.git"
+      cmd << " --force" if force
+      output = %x{#{cmd}}
+      puts "Generating migration to integrate #{plugin} in the app"
+      
+      to_version=Dir.glob("#{RAILS_ROOT}/vendor/plugins/#{plugin}/db/migrate/*.rb").inject(0) do |max, file_path|
+        n = File.basename(file_path).split('_', 2).first.to_i
+        if n > max then n else max end
+      end
+      from_version=0
+      cmd = "script/generate tog_migration Integrate#{plugin.classify}Version#{to_version}From#{from_version}"
+      output = %x{#{cmd}}
       
     end
 
