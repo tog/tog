@@ -1,6 +1,7 @@
 namespace :tog do
   namespace :plugins do
-    desc "Update the tog plugins on this app."
+    
+    desc "Update the tog plugins on this app. This will pull the changes on the HEAD of every tog plugins on your app. Use PLUGIN=plugin_name to update a specific plugin."
     task :update do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
         puts "Pulling changes of #{File.basename(directory)}"
@@ -9,6 +10,7 @@ namespace :tog do
         end
       end
     end
+    
     desc "Install a new tog plugin. Use PLUGIN parameter to specify the plugin to install e.g. PLUGIN=tog_vault. Use FORCE=true to overwrite the plugin if it's currently installed."
     task :install do
       plugin = ENV["PLUGIN"]
