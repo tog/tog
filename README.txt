@@ -1,48 +1,27 @@
-= tog
+tog
+============
+tog is the gem that boostraps the process of _togifing_ your app/site.
 
-* FIX (url)
+Install
+-------
 
-== DESCRIPTION:
+<pre>sudo gem install tog</pre>
 
-FIX (describe your package)
+Or from source (you will need Hoe >=1.5.3 and mislav-will_paginate ~> 2.3.2):
 
-== FEATURES/PROBLEMS:
+<pre>
+git clone git@github.com:tog/tog.git  
+cd tog
+rake install_gem
+</pre>
 
-* FIX (list of features or problems)
 
-== SYNOPSIS:
+More
+-------
 
-  FIX (code sample of usage)
+[http://github.com/tog/tog](http://github.com/tog/tog)
 
-== REQUIREMENTS:
+[http://github.com/tog/tog/wikis](http://github.com/tog/tog/wikis)
 
-* FIX (list of requirements)
 
-== INSTALL:
-
-* FIX (sudo gem install, anything else)
-
-== LICENSE:
-
-(The MIT License)
-
-Copyright (c) 2008 FIXME full name
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Copyright (c) 2008 Keras Software Development, released under the MIT license
