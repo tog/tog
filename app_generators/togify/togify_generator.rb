@@ -104,7 +104,7 @@ EOS
     end
     
     def checkout_code(plugin_path, plugin)
-      repository = "git@github.com:tog/#{plugin}.git"
+      repository = "git://github.com/tog/#{plugin}.git"
       revision = "head"
       
       FileUtils.rm_rf(plugin_path)
