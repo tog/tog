@@ -16,10 +16,6 @@ Gem::Specification.new do |s|
   s.post_install_message = %q{
 For more information on tog, see https://github.com/tog/tog
 
-NOTE: Change this information in PostInstall.txt 
-You can also delete it if you don't want it.
-
-
 }
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
