@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = %q{tog}
-  s.version = "0.1.6"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aitor Garc\303\255a", "Alberto Molpeceres", "Roberto Salicio"]
-  s.date = %q{2008-09-05}
+  s.date = %q{2008-09-23}
   s.default_executable = %q{togify}
   s.description = %q{extensible open source social network platform}
   s.email = ["aitor@linkingpaths.com", "alberto@linkingpaths.com", "roberto@linkingpaths.com"]
