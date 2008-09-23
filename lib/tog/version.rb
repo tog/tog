@@ -2,7 +2,7 @@ module Tog
   module VERSION #:nodoc:
     MAJOR = 0
     MINOR = 2
-    TINY  = 0
+    TINY  = 1
     # http://en.wikipedia.org/wiki/Moons_of_Jupiter
     CODENAME = 'Adrastea'
     STRING = [MAJOR, MINOR, TINY].join('.')
