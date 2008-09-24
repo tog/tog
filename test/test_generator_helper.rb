@@ -36,6 +36,7 @@ def setup_fake_tog_app
   FileUtils.mkdir_p(File.join(APP_ROOT, "/config"))
   copy_to_fake("/templates/environment.rb", "/config/environment.rb")
   copy_to_fake("/templates/routes.rb", "/config/routes.rb")
+  copy_to_fake("/templates/Rakefile", "/Rakefile")
   @plugins = %w{ tog_core tog_social tog_mail tog_user}  
 end
 def teardown_fake_tog_app

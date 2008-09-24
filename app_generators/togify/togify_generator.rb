@@ -55,6 +55,8 @@ EOS
       #         "Default: none") { |options[:author]| }
       opts.on("--skip-tog_user",
              "Don't add tog_user in the tog integration process. Use this if you have a User model and signup process already working") { |v| options[:skip_tog_user] = v }
+      opts.on("--development",
+             "Clone the repositories from the private clone urls allowing the developers to develop the plugins on a togified app.") { |v| options[:development] = v }
       opts.on("-v", "--version", "Show the #{File.basename($0)} version number and quit.")
     end
 
@@ -104,7 +106,7 @@ EOS
     end
 
     def checkout_code(plugin_path, plugin)
-      repository = "git://github.com/tog/#{plugin}.git"
+      repository = options[:development] ? "git@github.com:tog/#{plugin}.git": "git://github.com/tog/#{plugin}.git"
       revision = "head"
 
       FileUtils.rm_rf(plugin_path)
