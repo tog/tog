@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aitor Garc\303\255a", "Alberto Molpeceres", "Roberto Salicio"]
-  s.date = %q{2008-09-23}
+  s.date = %q{2008-09-24}
   s.default_executable = %q{togify}
   s.description = %q{extensible open source social network platform}
   s.email = ["aitor@linkingpaths.com", "alberto@linkingpaths.com", "roberto@linkingpaths.com"]
@@ -29,14 +29,17 @@ For more information on tog, see https://github.com/tog/tog
     s.specification_version = 2
 
     if current_version >= 3 then
-      s.add_runtime_dependency(%q<mislav-will_paginate>, ["~> 2.3.2"])
+      s.add_runtime_dependency(%q<mislav-will_paginate>, [">= 2.3.2"])
+      s.add_runtime_dependency(%q<tog-desert>, [">= 0.3.4"])
       s.add_development_dependency(%q<hoe>, [">= 1.7.0"])
     else
-      s.add_dependency(%q<mislav-will_paginate>, ["~> 2.3.2"])
+      s.add_dependency(%q<mislav-will_paginate>, [">= 2.3.2"])
+      s.add_dependency(%q<tog-desert>, [">= 0.3.4"])
       s.add_dependency(%q<hoe>, [">= 1.7.0"])
     end
   else
-    s.add_dependency(%q<mislav-will_paginate>, ["~> 2.3.2"])
+    s.add_dependency(%q<mislav-will_paginate>, [">= 2.3.2"])
+    s.add_dependency(%q<tog-desert>, [">= 0.3.4"])
     s.add_dependency(%q<hoe>, [">= 1.7.0"])
   end
 end
