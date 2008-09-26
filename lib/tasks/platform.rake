@@ -40,7 +40,10 @@ namespace :tog do
         if File.exists?(orig_public_dir)
           puts "Copying the public resources of #{plugin_name} to #{dest_public_dir}"
           FileUtils.mkdir_p(dest_public_dir)
-          FileUtils.cp_r(Dir["#{orig_public_dir}/*"], dest_public_dir )
+          is_svn_dir = proc {|path| path =~ /\.svn/}
+          Dir[orig_public_dir].reject(&is_svn_dir).each do |file|
+            FileUtils.cp_r(Dir["#{orig_public_dir}/*"], dest_public_dir )
+          end
         end
       end
     end
