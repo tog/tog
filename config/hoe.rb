@@ -9,6 +9,7 @@ DEVELOPERS = [
 GEM_NAME = 'tog'
 EXTRA_DEPENDENCIES = [
   ['mislav-will_paginate', '>= 2.3.2'],
+  ['rubigen', '>= 1.3.2'],
   ['tog-desert', '>= 0.3.4']
 ]
 

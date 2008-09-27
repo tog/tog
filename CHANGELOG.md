@@ -1,6 +1,6 @@
 Edge
 ----
-
+* Rubigen dependency added to gemspec.
 0.2.1
 ----
 * [#89 status:resolved] From now tog:plugins:copy_resources don't copy .svn dirs to app's public directory...
