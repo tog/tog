@@ -1,4 +1,4 @@
-CHANGELOG
+CHANGELOG.md
 MIT-LICENSE
 Manifest.txt
 POST_INSTALL
@@ -19,10 +19,12 @@ lib/tasks/platform.rake
 lib/tasks/tog.rb
 lib/tog.rb
 lib/tog/version.rb
+test/templates/Rakefile
 test/templates/environment.rb
 test/templates/routes.rb
 test/test_generator_helper.rb
 test/test_helper.rb
+test/test_rake_tasks.rb
 test/test_tog.rb
 test/test_tog_plugin_generator.rb
 test/test_togify_generator.rb

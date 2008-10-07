@@ -21,11 +21,11 @@ class TogifyGenerator < RubiGen::Base
 
       # Include tog rake tasks on the app
       include_tog_rake_tasks("#{destination_root}/Rakefile")
-      
-      # Install desert dependency 
-      require_desert_on_environment("#{destination_root}/config/environment.rb") 
 
-      # PLugins 
+      # Install desert dependency
+      require_desert_on_environment("#{destination_root}/config/environment.rb")
+
+      # PLugins
       plugins = install_default_plugins
 
       # Migrations
@@ -55,6 +55,8 @@ EOS
       #         "Default: none") { |options[:author]| }
       opts.on("--skip-tog_user",
              "Don't add tog_user in the tog integration process. Use this if you have a User model and signup process already working") { |v| options[:skip_tog_user] = v }
+      opts.on("--development",
+             "Clone the repositories from the private clone urls allowing the developers to develop the plugins on a togified app.") { |v| options[:development] = v }
       opts.on("-v", "--version", "Show the #{File.basename($0)} version number and quit.")
     end
 
@@ -64,7 +66,7 @@ EOS
       # raw instance variable value.
       # @author = options[:author]
     end
-    
+
     def include_tog_rake_tasks(rakefile)
       sentinel = "require 'tasks/rails'"
       logger.create "require tog rake tasks"
@@ -73,9 +75,9 @@ EOS
           "#{match}\n\nrequire 'tasks/tog'\n"
         end
       end
-      
+
     end
-    
+
     def require_desert_on_environment(env_file)
       sentinel = 'Rails::Initializer.run do |config|'
       logger.create "require 'desert' on environment"
@@ -92,21 +94,21 @@ EOS
       plugins << "tog_user" unless options[:skip_tog_user]
       plugins += %w{tog_social tog_mail}
     end
-    
+
     def install_default_plugins
       default_plugins.collect{|plugin|
-        plugin_path = "#{destination_root}/vendor/plugins/#{plugin}" 
+        plugin_path = "#{destination_root}/vendor/plugins/#{plugin}"
         checkout_code(plugin_path, plugin)
         logger.create "vendor/plugins/#{plugin}"
         route_from_plugins("#{destination_root}/config/routes.rb", plugin)
         {:name => plugin,:current_migration => current_migration_number(plugin_path) }
       }
     end
-    
+
     def checkout_code(plugin_path, plugin)
-      repository = "git://github.com/tog/#{plugin}.git"
+      repository = options[:development] ? "git@github.com:tog/#{plugin}.git": "git://github.com/tog/#{plugin}.git"
       revision = "head"
-      
+
       FileUtils.rm_rf(plugin_path)
       system("git clone #{repository} #{plugin_path}")
     end
@@ -129,7 +131,7 @@ EOS
     def gsub_file(path, regexp, *args, &block)
       content = File.read(path).gsub(regexp, *args, &block)
       File.open(path, 'wb') { |file| file.write(content) }
-    end 
+    end
 
     BASEDIRS = %w(
       config

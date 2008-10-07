@@ -8,9 +8,10 @@ DEVELOPERS = [
 
 GEM_NAME = 'tog'
 EXTRA_DEPENDENCIES = [
-  ['mislav-will_paginate', '~> 2.3.2']
+  ['mislav-will_paginate', '>= 2.3.2'],
+  ['rubigen', '>= 1.3.2'],
+  ['tog-desert', '>= 0.3.4']
 ]
-
 
 REV = nil
 # UNCOMMENT IF REQUIRED:
@@ -37,7 +38,7 @@ $hoe = Hoe.new(GEM_NAME, VERS) do |p|
 
   # == Optional
   p.post_install_message = File.open(File.dirname(__FILE__) + "/../POST_INSTALL").read rescue ""
-  p.changes = p.paragraphs_of("CHANGELOG", 0..1).join("\n\n") rescue ""
+  p.changes = p.paragraphs_of("CHANGELOG.md", 0..1).join("\n\n") rescue ""
   p.extra_deps = EXTRA_DEPENDENCIES
   #p.spec_extras = {}    # A hash of extra values to set in the gemspec.
 end
