@@ -1,18 +1,19 @@
 module Tog
-  module VERSION #:nodoc:
+  module Version
     MAJOR = 0
     MINOR = 2
-    TINY  = 1
-    # http://en.wikipedia.org/wiki/Moons_of_Jupiter
-    CODENAME = 'Adrastea'
+    TINY  = 8
+    MODULE = 'Adrastea'
     STRING = [MAJOR, MINOR, TINY].join('.')
-    
+
     class << self
       def to_s
-        "#{CODENAME} #{STRING}"
+        STRING
+      end
+      def full_version
+        "#{MODULE} #{STRING}"
       end
       alias :to_str :to_s
     end
-    
   end
 end
