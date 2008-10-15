@@ -1,5 +1,8 @@
 Edge
 ----
+
+0.3.0
+----
 * Rubigen dependency added to gemspec.
 
 0.2.1
