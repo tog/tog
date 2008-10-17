@@ -1,3 +1,6 @@
+require 'tog'
+require 'zip/zip'
+
 class TogifyGenerator < RubiGen::Base
 
   DEFAULT_SHEBANG = File.join(Config::CONFIG['bindir'],
@@ -106,12 +109,53 @@ EOS
     end
 
     def checkout_code(plugin_path, plugin)
-      repository = options[:development] ? "git@github.com:tog/#{plugin}.git": "git://github.com/tog/#{plugin}.git"
+      options[:development] ? clone_repo(plugin_path, plugin): tarball_repo(plugin_path, plugin)
+    end
+    # "vendor/plugins/tog_core", "tog_core"
+    def tarball_repo(plugin_path, plugin)
+      uri = "http://github.com/tog/#{plugin}/zipball/v#{Tog::Version::STRING}"
+      zip = tarball_fetch(uri)
+      tarball_unpack(zip, plugin)
+    end
+    
+    def tarball_fetch(uri, redirect_limit = 10)
+      raise ArgumentError, "HTTP redirect too deep trying to get #{url}" if redirect_limit == 0
+      response = Net::HTTP.get_response(URI.parse(uri))
+      case response
+      when Net::HTTPSuccess
+        temp_zip = Time.now.to_i.to_s
+        open(temp_zip, "wb") { |file|
+          file.write(response.read_body)
+        }
+        temp_zip
+      when Net::HTTPRedirection then tarball_fetch(response['location'], redirect_limit - 1)
+      else
+        tarball_fetch(uri, redirect_limit - 1)
+      end
+    end
+    
+    def tarball_unpack(file, plugin)
+      destination = "#{destination_root}/vendor/plugins"
+      Zip::ZipFile.open(file) { |zip_file|
+       zip_file.each { |f|
+         f_path=File.join(destination, f.name)
+         FileUtils.mkdir_p(File.dirname(f_path))
+         zip_file.extract(f, f_path) unless File.exist?(f_path)
+       }
+      }
+      temp = Dir.glob(File.join(destination, "tog-#{plugin}*")).first
+      FileUtils.mv temp, File.join(destination, plugin)
+      FileUtils.rm_rf file
+    end
+    
+    def clone_repo(plugin_path, plugin)
+      repository = "git@github.com:tog/#{plugin}.git"
       revision = "head"
-
       FileUtils.rm_rf(plugin_path)
       system("git clone #{repository} #{plugin_path}")
     end
+
+
     def current_migration_number(plugin_path)
       Dir.glob("#{plugin_path}/db/migrate/*.rb").inject(0) do |max, file_path|
         n = File.basename(file_path).split('_', 2).first.to_i
