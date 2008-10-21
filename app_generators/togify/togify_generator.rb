@@ -136,16 +136,22 @@ EOS
     
     def tarball_unpack(file, plugin)
       destination = "#{destination_root}/vendor/plugins"
-      Zip::ZipFile.open(file) { |zip_file|
-       zip_file.each { |f|
-         f_path=File.join(destination, f.name)
-         FileUtils.mkdir_p(File.dirname(f_path))
-         zip_file.extract(f, f_path) unless File.exist?(f_path)
-       }
-      }
-      temp = Dir.glob(File.join(destination, "tog-#{plugin}*")).first
-      FileUtils.mv temp, File.join(destination, plugin)
-      FileUtils.rm_rf file
+      begin
+        Zip::ZipFile.open(file) { |zip_file|
+         zip_file.each { |f|
+           f_path=File.join(destination, f.name)
+           FileUtils.mkdir_p(File.dirname(f_path))
+           zip_file.extract(f, f_path) unless File.exist?(f_path)
+         }
+        }
+        temp = Dir.glob(File.join(destination, "tog-#{plugin}*")).first
+        FileUtils.mv temp, File.join(destination, plugin)
+        FileUtils.rm_rf file
+        
+      rescue Exception => e
+        logger.error "There has been a problem trying to unpack the #{plugin} tarball downloaded from github. Remove the changes made on your app by togify and try again. Sorry for the inconveniences."
+        exit -1
+      end
     end
     
     def clone_repo(plugin_path, plugin)
