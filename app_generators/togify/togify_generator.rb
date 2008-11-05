@@ -119,7 +119,7 @@ EOS
     end
     
     def tarball_fetch(uri, redirect_limit = 10)
-      raise ArgumentError, "HTTP redirect too deep trying to get #{url}" if redirect_limit == 0
+      raise ArgumentError, "HTTP redirect too deep trying to get #{uri}" if redirect_limit == 0
       response = Net::HTTP.get_response(URI.parse(uri))
       case response
       when Net::HTTPSuccess
