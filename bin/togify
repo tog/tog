@@ -5,7 +5,7 @@ require 'rubigen'
 
 if %w(-v --version).include? ARGV.first
   require 'tog/version'
-  puts "#{File.basename($0)} #{Tog::VERSION::STRING}"
+  puts "#{File.basename($0)} #{Tog::Version::STRING}"
   exit(0)
 end
 

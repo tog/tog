@@ -10,13 +10,14 @@ GEM_NAME = 'tog'
 EXTRA_DEPENDENCIES = [
   ['mislav-will_paginate', '>= 2.3.2'],
   ['rubigen', '>= 1.3.2'],
-  ['tog-desert', '>= 0.3.4']
+  ['tog-desert', '>= 0.3.4'],
+  ['RedCloth', '>= 3.0.4']
 ]
 
 REV = nil
 # UNCOMMENT IF REQUIRED:
 # REV = YAML.load(`svn info`)['Revision']
-VERS = Tog::VERSION::STRING + (REV ? ".#{REV}" : "")
+VERS = Tog::Version::STRING + (REV ? ".#{REV}" : "")
 
 class Hoe
   def extra_deps
