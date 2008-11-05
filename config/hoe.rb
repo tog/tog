@@ -11,7 +11,8 @@ EXTRA_DEPENDENCIES = [
   ['mislav-will_paginate', '>= 2.3.2'],
   ['rubigen', '>= 1.3.2'],
   ['tog-desert', '>= 0.3.4'],
-  ['RedCloth', '>= 3.0.4']
+  ['RedCloth', '>= 3.0.4'],
+  ['rubyzip', '>= 0.9.1']
 ]
 
 REV = nil
