@@ -1,5 +1,6 @@
 Edge
 ----
+* Changed the list_specs based on files by one based on classes
 * togify: Use github's tarballs instead of a git clone to a) remove git dependecy on togify and b) use a tagged release of tog plugins instead of the edge
 
 0.3.0
