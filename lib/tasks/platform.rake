@@ -1,6 +1,6 @@
 namespace :tog do
   namespace :plugins do
-    
+
     desc "Update the tog plugins on this app. This will pull the changes on the HEAD of every tog plugins on your app. Use PLUGIN=plugin_name to update a specific plugin."
     task :update do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
@@ -10,7 +10,7 @@ namespace :tog do
         end
       end
     end
-    
+
     desc "Install a new tog plugin. Use PLUGIN parameter to specify the plugin to install e.g. PLUGIN=tog_vault. Use FORCE=true to overwrite the plugin if it's currently installed."
     task :install do
       plugin = ENV["PLUGIN"]
@@ -20,7 +20,7 @@ namespace :tog do
       cmd << " --force" if force
       output = %x{#{cmd}}
       puts "Generating migration to integrate #{plugin} in the app"
-      
+
       to_version=Dir.glob("#{RAILS_ROOT}/vendor/plugins/#{plugin}/db/migrate/*.rb").inject(0) do |max, file_path|
         n = File.basename(file_path).split('_', 2).first.to_i
         if n > max then n else max end
@@ -28,13 +28,13 @@ namespace :tog do
       from_version=0
       cmd = "script/generate tog_migration Integrate#{plugin.classify}Version#{to_version}From#{from_version}"
       output = %x{#{cmd}}
-      
+
     end
 
     desc "Copy the public resources stored on the /public folder of every tog plugin on the app's public folder with the plugin name used as prefix. Pass PLUGIN=plugin_name to copy the resources of a single plugin."
     task :copy_resources do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
-        plugin_name = File.basename(directory) 
+        plugin_name = File.basename(directory)
         dest_public_dir = File.join(RAILS_ROOT, "public", plugin_name)
         orig_public_dir = File.join(directory, "public")
         if File.exists?(orig_public_dir)
@@ -68,7 +68,7 @@ namespace :tog do
       require 'test/unit'
       require 'rubygems'
       require 'active_support'
-      
+
       # bug in test unit.  Set to true to stop from running.
       Test::Unit.run = true
 
@@ -78,7 +78,7 @@ namespace :tog do
             test_files = Dir.glob(File.join('test', '**', '*_test.rb'))
             test_files.each do |file|
               load file
-              klass = File.basename(file, '.rb').classify.constantize
+              klass = File.read(file)[/class\s(.*Test)\s</, 1].constantize
 
               puts klass.name.gsub('Test', '')
 
