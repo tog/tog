@@ -13,7 +13,7 @@ EXTRA_DEPENDENCIES = [
   ['tog-desert', '>= 0.3.4'],
   ['RedCloth', '>= 3.0.4'],
   ['rubyzip', '>= 0.9.1'],
-  ['oauth', '>= 0.2.7'],
+  ['oauth', '>= 0.2.7']
 ]
 
 REV = nil
