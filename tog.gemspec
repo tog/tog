@@ -36,6 +36,7 @@ For more information on tog, see https://github.com/tog/tog
       s.add_runtime_dependency(%q<tog-desert>, [">= 0.3.4"])
       s.add_runtime_dependency(%q<RedCloth>, [">= 3.0.4"])
       s.add_runtime_dependency(%q<rubyzip>, [">= 0.9.1"])
+      s.add_runtime_dependency(%q<oauth>, [">= 0.2.7"])
       s.add_development_dependency(%q<hoe>, [">= 1.8.2"])
     else
       s.add_dependency(%q<mislav-will_paginate>, [">= 2.3.2"])
@@ -43,6 +44,7 @@ For more information on tog, see https://github.com/tog/tog
       s.add_dependency(%q<tog-desert>, [">= 0.3.4"])
       s.add_dependency(%q<RedCloth>, [">= 3.0.4"])
       s.add_dependency(%q<rubyzip>, [">= 0.9.1"])
+      s.add_dependency(%q<oauth>, [">= 0.2.7"])
       s.add_dependency(%q<hoe>, [">= 1.8.2"])
     end
   else
@@ -51,6 +53,7 @@ For more information on tog, see https://github.com/tog/tog
     s.add_dependency(%q<tog-desert>, [">= 0.3.4"])
     s.add_dependency(%q<RedCloth>, [">= 3.0.4"])
     s.add_dependency(%q<rubyzip>, [">= 0.9.1"])
+    s.add_dependency(%q<oauth>, [">= 0.2.7"])
     s.add_dependency(%q<hoe>, [">= 1.8.2"])
   end
 end

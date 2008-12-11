@@ -1,5 +1,6 @@
 require 'tog'
 require 'zip/zip'
+require 'net/http'
 
 class TogifyGenerator < RubiGen::Base
 
