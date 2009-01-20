@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
+require 'active_record'
 require 'rubigen'
 
 if %w(-v --version).include? ARGV.first
