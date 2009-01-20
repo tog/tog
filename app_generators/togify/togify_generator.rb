@@ -151,7 +151,7 @@ EOS
         
       rescue Exception => e
         logger.error "There has been a problem trying to unpack the #{plugin} tarball downloaded from github. Remove the changes made on your app by togify and try again. Sorry for the inconveniences."
-        exit -1
+        exit(-1)
       end
     end
     
