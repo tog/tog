@@ -27,7 +27,6 @@ class TestTogifyGenerator < Test::Unit::TestCase
       assert_generated_file "config/routes.rb" do |body|
         assert_has_plugin_routes body, plugin
       end
-      assert_remote_origin_of_plugin(plugin, "git://github.com/tog/(.*).git")
     }
     generated_migration = Dir.glob("#{APP_ROOT}/db/migrate/*_integrate_tog.rb")[0]
     assert generated_migration, "should be a IntegrateTog migration in the togified app"

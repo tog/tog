@@ -21,9 +21,11 @@ else
 end
 
 begin
+  require 'active_record'
   require 'rubigen'
 rescue LoadError
   require 'rubygems'
+  require 'active_record'
   require 'rubigen'
 end
 require 'rubigen/helpers/generator_test_helper'
