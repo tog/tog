@@ -2,7 +2,7 @@ module Tog
 module Version
   MAJOR = 0
   MINOR = 4
-  TINY  = 0
+  TINY  = 1
   MODULE = "Thebe"
   STRING = [MAJOR, MINOR, TINY].join('.')
 
