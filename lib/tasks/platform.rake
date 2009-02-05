@@ -1,6 +1,20 @@
 namespace :tog do
   namespace :plugins do
-
+    namespace :db do
+      desc "Retrieves the current schema version numbers of the tog plugins in this app. Use PLUGIN=plugin_name to retrieves a specific plugin version."
+      task :version do
+        plugin_roots(ENV["PLUGIN"]).each do |directory|
+          require File.expand_path(File.join(RAILS_ROOT, "config","environment"))
+          name = File.basename(directory)
+          Desert::PluginMigrations::Migrator.current_plugin = Desert::Manager.find_plugin(name)
+          current_version = Desert::PluginMigrations::Migrator.current_version
+          max_version = max_migration_number(directory)
+          msg = "[#{name}] Current Version : #{current_version}"
+          msg << " (This plugin is NOT uptodate. Most recent migration available: #{max_version})" if max_version > current_version
+          puts msg
+        end
+      end
+    end
     desc "Update the tog plugins on this app. This will pull the changes on the HEAD of every tog plugins on your app. Use PLUGIN=plugin_name to update a specific plugin."
     task :update do
       plugin_roots(ENV["PLUGIN"]).each do |directory|
@@ -21,11 +35,8 @@ namespace :tog do
       output = %x{#{cmd}}
       puts "Generating migration to integrate #{plugin} in the app"
 
-      to_version=Dir.glob("#{RAILS_ROOT}/vendor/plugins/#{plugin}/db/migrate/*.rb").inject(0) do |max, file_path|
-        n = File.basename(file_path).split('_', 2).first.to_i
-        if n > max then n else max end
-      end
-      from_version=0
+      to_version = max_migration_number("#{RAILS_ROOT}/vendor/plugins/#{plugin}")
+      from_version = 0
       cmd = "script/generate tog_migration Integrate#{plugin.classify}Version#{to_version}From#{from_version}"
       output = %x{#{cmd}}
 
@@ -101,4 +112,10 @@ def plugin_roots(plugin=nil)
     end
   end
   roots
+end
+def max_migration_number(plugin)
+  to_version=Dir.glob("#{plugin}/db/migrate/*.rb").inject(0) do |max, file_path|
+    n = File.basename(file_path).split('_', 2).first.to_i
+    if n > max then n else max end
+  end
 end

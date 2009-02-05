@@ -1,6 +1,6 @@
 Edge
 ----
-
+* #106 New "tog:plugins:db:version" task 
 0.4.0
 ----
 * Changed the list_specs based on files by one based on classes
