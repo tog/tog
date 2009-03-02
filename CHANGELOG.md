@@ -1,6 +1,9 @@
 Edge
 ----
 
+0.4.4
+----
+
 0.4.2
 ----
 * #106 New "tog:plugins:db:version" task 
