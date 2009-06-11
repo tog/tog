@@ -45,3 +45,5 @@ $hoe = Hoe.new(GEM_NAME, VERS) do |p|
   p.extra_deps = EXTRA_DEPENDENCIES
   #p.spec_extras = {}    # A hash of extra values to set in the gemspec.
 end
+
+require 'newgem/tasks'
