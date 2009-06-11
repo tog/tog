@@ -10,6 +10,7 @@ GEM_NAME = 'tog'
 EXTRA_DEPENDENCIES = [
   ['mislav-will_paginate', '>= 2.3.2'],
   ['rubigen', '>= 1.3.2'],
+  ['newgem', '>= 1.0.3'],
   ['desert', '>= 0.5'],
   ['RedCloth', '>= 3.0.4'],
   ['rubyzip', '>= 0.9.1'],
