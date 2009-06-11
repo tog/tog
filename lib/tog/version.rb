@@ -1,9 +1,9 @@
 module Tog
 module Version
   MAJOR = 0
-  MINOR = 4
-  TINY  = 4
-  MODULE = "Thebe"
+  MINOR = 5
+  TINY  = 0
+  MODULE = "Io"
   STRING = [MAJOR, MINOR, TINY].join('.')
 
   class << self
