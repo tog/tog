@@ -2,7 +2,7 @@ module Tog
 module Version
   MAJOR = 0
   MINOR = 5
-  TINY  = 0
+  TINY  = 1
   MODULE = "Io"
   STRING = [MAJOR, MINOR, TINY].join('.')
 
