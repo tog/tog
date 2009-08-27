@@ -1,5 +1,8 @@
 Edge
 ----
+
+0.5.4
+----
 * Updated tog gem to require Desert 0.5.2 that fix some "Plugin schema migrations should successfully convert from the 'old' scheme to the 'new' scheme"" [Thanks Andrei!]
 
 0.5.3
